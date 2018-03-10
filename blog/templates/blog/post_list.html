@@ -1,32 +1,13 @@
-<html>
-    <head>
-        <title>Andy's blog</title>
-    </head>
-    <body>
-          <div>
-              <h2><a href="/">Andy's Blog</a></h2>
-          </div>
+{% extends 'blog/base.html' %}
 
-          <div>
-              <h2><a href="">It's not easy being giant</a></h2>
-              <p>published: 14.06.2014, 12:14</p>
-              <p>At what point is tall, too tall? About the point that you've hit your head on the ceiling more in your life than you've fallen.</p>
-          </div>
-
-          <div>
-            {% for post in posts %}
-            <div>
-                <h2><a href="">{{ post.title }}</a></h2>
-                <p>published: {{ post.published_date }}</p>
-                <p>{{ post.text|linebreaksbr }}</p>
-            </div>
-            {% endfor %}
-          </div>
-
-          <div>
-              <h2><a href="">Fun with Friends</a></h2>
-              <p>published: 14.06.2014, 12:14</p>
-              <p>Friendship is fluid. Each can decide the paramaters for themselves. At what point do demands on time because too much and friendship becomes optional?</p>
-          </div>
-      </body>
-  </html>
+{% block content %}
+                    {% for post in posts %}
+                        <div class="post">
+                            <div class="date">
+                                <p>published: {{ post.published_date }}</p>
+                            </div>
+                            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                            <p>{{ post.text|linebreaksbr }}</p>
+                        </div>
+                    {% endfor %}
+{% endblock %}
